@@ -2,3 +2,62 @@
 {
 	margin: 0px;
 }
+
+.sprite
+{
+	border-radius: 10px;
+	
+	width: 200px;
+	height: 200px;
+	position: absolute;
+
+}
+
+#red
+{
+	left: 50px;
+	background-color: red;
+}
+
+#blue
+{
+	top: -50px;
+	left: 300px;
+	background-color: blue;
+}
+
+#red  > #sword
+{
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	width: 100px;
+	height: 10px;
+	background-color: yellow;
+}
+
+#frame
+{
+	width: 640px;
+	height: 480px;
+	overflow: hidden;
+	position: absolute;
+	background-color: #eee;
+	border: 1px solid black;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	margin: auto;
+	
+}
+
+#camera
+{
+	top: 0px;
+	position: absolute;
+	transition: top, left;
+	transition-duration: 0.5s;
+}
+
+
