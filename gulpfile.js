@@ -35,8 +35,8 @@ gulp.task("build:styles", function() {
 })
 
 gulp.task("build:stuffs", function() {
-    gulp.src(["./source/*", "!./source/*.html",
-              "!./source/*.js", "!./source/*.css"])
+    gulp.src(["./source/**/*", "!./source/**/*.html",
+              "!./source/**/*.js", "!./source/**/*.css"])
         .pipe(gulp.dest("./build"))
 })
 
