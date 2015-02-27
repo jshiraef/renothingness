@@ -32,8 +32,10 @@
 	left: 10px;
 	top: 10px;
 	width: 100px;
-	height: 10px;
-	background-color: yellow;
+	height: 50px;
+	background-image: url(assets/sword.jpg);
+	background-size: contain;
+	background-repeat: no-repeat;
 }
 
 #frame
