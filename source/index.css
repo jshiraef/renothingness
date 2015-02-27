@@ -7,8 +7,8 @@
 {
 	border-radius: 10px;
 	
-	width: 200px;
-	height: 200px;
+	width: 64px;
+	height: 64px;
 	position: absolute;
 
 }
@@ -38,18 +38,17 @@
 
 #frame
 {
-	width: 640px;
-	height: 480px;
+	width: 704px;
+	height: 576px;
 	overflow: hidden;
 	position: absolute;
-	background-color: #eee;
+	background-color: PapayaWhip;
 	border: 1px solid black;
 	top: 0px;
 	left: 0px;
 	right: 0px;
 	bottom: 0px;
 	margin: auto;
-	
 }
 
 #camera
@@ -59,5 +58,25 @@
 	transition: top, left;
 	transition-duration: 0.5s;
 }
+
+.tile
+{
+
+	width: 64px;
+	height: 64px;
+	position: absolute;
+}
+
+.wall.tile
+{
+	background-color: brown;
+}
+
+.floor.tile
+{
+	background-color: PapayaWhip;
+}
+
+	
 
 

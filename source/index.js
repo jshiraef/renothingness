@@ -11,6 +11,30 @@ var cx = 0;
 var cy = 0;
 var deacceleration = 50;
 var maxVelocity = 100;
+var width = 704;
+var height = 576;
+
+var level = require("./assets/mapPrototype.json")
+
+var levelData = level.layers[0].data;
+
+for(var y = 0; y < 18; y++)
+	{
+	 for (var x = 0; x < 33; x ++)
+		 {
+		 var tile = levelData[y * 33 + x]
+		 
+			if(tile ==	1)
+			{
+				 var tileHTML = $("<div class='wall tile'>")
+				 tileHTML.css({top: y * 64})
+				 tileHTML.css({left: x * 64})
+				 
+				 $("#tiles").append(tileHTML)
+			}
+		 }
+	}
+			
 
 var Input = require("./scripts/Input.js")
 
@@ -95,12 +119,10 @@ Loop(function(tick)
 	
 	$("#red").css({top: y})
 	$("#red").css({left: x})
-	cx = Math.floor(x/640) * -640
-	cy = Math.floor(y/480) * -480
+	cx = Math.floor(x/width) * -width
+	cy = Math.floor(y/height) * -height
 
 	$("#camera").css({top: cy})
 	$("#camera").css({left: cx})
 	
 })
-
-console.log(Loop)
