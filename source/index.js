@@ -121,7 +121,7 @@ Loop(function(tick)
 	cx = Math.floor(x / width) * -width
 	cy = Math.floor(y / height) * -height
 
-	//$("#camera").css({top: cy + "em"})
-	//$("#camera").css({left: cx + "em"})
+	$("#camera").css({top: cy + "em"})
+	$("#camera").css({left: cx + "em"})
 	
 })
