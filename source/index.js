@@ -13,11 +13,14 @@ deacceleration: 0.5,
 maxVelocity: 0.1
 }
 
-var cx = 0
-var cy = 0
+var Camera = {
+cx: 0, cy: 0
+}
 
-var width = 11
-var height = 9
+var Room = {
+width: 11, height: 9
+}
+
 
 function createRoom(rx, ry, data)
 {
@@ -148,11 +151,11 @@ Loop(function(tick)
 
 	Hero.y += Hero.vy
 	Hero.x += Hero.vx
-	cx = Math.floor(Hero.x / width) * -width
-	cy = Math.floor(Hero.y / height) * -height
+	Camera.cx = Math.floor(Hero.x / Room.width) * -Room.width
+	Camera.cy = Math.floor(Hero.y / Room.height) * -Room.height
 	
 	$("#red").css({top: Hero.y + "em"})
 	$("#red").css({left: Hero.x + "em"})
-	$("#camera").css({top: cy + "em"})
-	$("#camera").css({left: cx + "em"})
+	$("#camera").css({top: Camera.cy + "em"})
+	$("#camera").css({left: Camera.cx + "em"})
 })
