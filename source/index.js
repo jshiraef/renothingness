@@ -3,32 +3,32 @@ var $ = require("jQuery")
 var Loop = require("./scripts/Loop.js")
 var Input = require("./scripts/Input.js")
 
-var x = 0
-var y = 0
-var speed = 75
-var vy = 0
-var vx = 0
-var cx = 0
-var cy = 0
-var deacceleration = 50
-var maxVelocity = 100
-var width = 704
-var height = 576
+var x = 0;
+var y = 0;
+var speed = 1;
+var vy = 0;
+var vx = 0;
+var cx = 0;
+var cy = 0;
+var deacceleration = 0.5;
+var maxVelocity = 0.5;
+var width = 11;
+var height = 9;
 
 var level = require("./assets/mapPrototype.json")
 var levelData = level.layers[0].data
 
-for(var y = 0; y < 18; y++)
+for (var ix = 0; ix < level.width; ix++)
 {
-	for (var x = 0; x < 33; x ++)
+	for(var iy = 0; iy < level.height; iy++)
 	{
-		var tile = levelData[y * 33 + x]
+		var tile = levelData[iy * 33 + ix]
 
 		if(tile ==	1)
 		{
 			var tileHTML = $("<div class='wall tile'>")
-			tileHTML.css({top: y * 64})
-			tileHTML.css({left: x * 64})
+			tileHTML.css({top: iy + "em"})
+			tileHTML.css({left: ix + "em"})
 			 
 			$("#tiles").append(tileHTML)
 		}
@@ -107,14 +107,14 @@ Loop(function(tick)
 	{
 		vy = -maxVelocity
 	}
-		
-	y += vy
+	
+	y += vy	
 	x += vx
-	cx = Math.floor(x/width) * -width
-	cy = Math.floor(y/height) * -height
-
-	$("#red").css({top: y})
-	$("#red").css({left: x})
-	$("#camera").css({top: cy})
-	$("#camera").css({left: cx})
+	cx = Math.floor(x / width) * -width
+	cy = Math.floor(y / height) * -height
+	
+	$("#red").css({top: y + "em"})
+	$("#red").css({left: x + "em"})
+	$("#camera").css({top: cy + "em"})
+	$("#camera").css({left: cx + "em"})
 })
