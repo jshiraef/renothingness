@@ -3,18 +3,24 @@ var $ = require("jQuery")
 var Loop = require("./scripts/Loop.js")
 var Input = require("./scripts/Input.js")
 
-var x = 1
-var y = 1
-var speed = 1
-var vy = 0
-var vx = 0
-var cx = 0
-var cy = 0
-var deacceleration = 0.5
-var maxVelocity = 0.1
-var width = 11
-var height = 9
-var direction = "east"
+var Hero = {
+	x: 0,
+	y: 0,
+	speed: 1,
+	vy: 0,
+	vx: 0,
+	deacceleration: 0.5,
+	maxVelocity: 0.1,
+	direction: "south"
+}
+
+var Camera = {
+cx: 0, cy: 0
+}
+
+var Room = {
+width: 11, height: 9
+}
 
 function createRoom(rx, ry, data)
 {
@@ -33,6 +39,7 @@ function createRoom(rx, ry, data)
 	{
 		for(var ty = 0; ty < room.height; ty++)
 		{
+		
 			var tile = roomData[ty * room.width + tx]
 
 			if(data.doors.indexOf("north") != -1
@@ -69,104 +76,106 @@ createRoom(1, 1, {doors: ["west"]})
 
 Loop(function(tick)
 {
+	console.log(Hero.x + ", " + Hero.y)
+
 	if(Input.hasKey(83))
 	{
-		direction = "north"
-		vy +=  speed * tick
+		Hero.direction = "north"
+		Hero.vy +=  Hero.speed * tick
 	}
 	if(Input.hasKey(87))
 	{
-		direction = "south"
-		vy -= speed * tick
+		Hero.direction = "south"
+		Hero.vy -= Hero.speed * tick
 	}
 	if(Input.hasKey(65))
 	{
-		direction = "west"
-		vx -= speed * tick
+		Hero.direction = "west"
+		Hero.vx -= Hero.speed * tick
 	}
 	if(Input.hasKey(68))
 	{
-		direction = "east"
-		vx += speed * tick
+		Hero.direction = "east"
+		Hero.vx += Hero.speed * tick
 	}
 	
-	if(vy > 0)
+	if(Hero.vy > 0)
 	{
-		vy -= deacceleration * tick
+		Hero.vy -= Hero.deacceleration * tick
 		
-		if(vy < 0)
+		if(Hero.vy < 0)
 		{
-			vy = 0
+			Hero.vy = 0
 		}
 	}
-	else if (vy < 0)
+	else if (Hero.vy < 0)
 	{
-		vy += deacceleration * tick
+		Hero.vy += Hero.deacceleration * tick
 		
-		if(vy > 0)
+		if(Hero.vy > 0)
 		{
-			vy = 0
+			Hero.vy = 0
 		}
 	}
-	if(vx > 0)
+	if(Hero.vx > 0)
 	{
-		vx -= deacceleration * tick
+		Hero.vx -= Hero.deacceleration * tick
 		
-		if(vx < 0)
+		if(Hero.vx < 0)
 		{
-			vx = 0
+			Hero.vx = 0
 		}
 	}
-	else if (vx < 0)
+	else if (Hero.vx < 0)
 	{
-		vx += deacceleration * tick
+		Hero.vx += Hero.deacceleration * tick
 		
-		if(vx > 0)
+		if(Hero.vx > 0)
 		{
-			vx = 0
+			Hero.vx = 0
 		}
 	}
 	
-	if(vx > maxVelocity)
+	if(Hero.vx > Hero.maxVelocity)
 	{
-		 vx = maxVelocity
+		 Hero.vx = Hero.maxVelocity
 	}
-	else if(vx < -maxVelocity)
+	else if(Hero.vx < -Hero.maxVelocity)
 	{
-		 vx = -maxVelocity
+		 Hero.vx = -Hero.maxVelocity
 	}
-	if(vy > maxVelocity)
+	if(Hero.vy > Hero.maxVelocity)
 	{
-		vy = maxVelocity
+		Hero.vy = Hero.maxVelocity
 	}
-	else if(vy < -maxVelocity)
+	else if(Hero.vy < -Hero.maxVelocity)
 	{
-		vy = -maxVelocity
+		Hero.vy = -Hero.maxVelocity
 	}
 
-	y += vy
-	x += vx
-	cx = Math.floor(x / width) * -width
-	cy = Math.floor(y / height) * -height
+	Hero.y += Hero.vy
+	Hero.x += Hero.vx
+	Camera.cx = Math.floor(Hero.x / Room.width) * -Room.width
+	Camera.cy = Math.floor(Hero.y / Room.height) * -Room.height
 	
-	$("#red").css({top: y + "em"})
-	$("#red").css({left: x + "em"})
-	$("#camera").css({top: cy + "em"})
-	$("#camera").css({left: cx + "em"})
+	$("#red").css({top: Hero.y + "em"})
+	$("#red").css({left: Hero.x + "em"})
+	$("#camera").css({top: Camera.cy + "em"})
+	$("#camera").css({left: Camera.cx + "em"})
 
-	if(direction == "north")
+	if(Hero.direction == "north")
 	{
 		$("#red > img").css({top: "-2em"})
 	}
-	else if(direction == "south")
+	else if(Hero.direction == "south")
 	{
 		$("#red > img").css({top: "-3em"})
 	}
-	else if(direction == "west")
+	else if(Hero.direction == "west")
 	{
 		$("#red > img").css({top: "-1em"})
 	}
-	else if(direction == "east")
+	else if(Hero.direction == "east")
 	{
 		$("#red > img").css({top: "0em"})
 	}
