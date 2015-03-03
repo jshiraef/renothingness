@@ -11,7 +11,7 @@ var vx = 0
 var cx = 0
 var cy = 0
 var deacceleration = 0.5
-var maxVelocity = 0.5
+var maxVelocity = 0.1
 var width = 11
 var height = 9
 
@@ -108,7 +108,7 @@ Loop(function(tick)
 		vy = -maxVelocity
 	}
 	
-	y += vy	
+	y += vy
 	x += vx
 	cx = Math.floor(x / width) * -width
 	cy = Math.floor(y / height) * -height
