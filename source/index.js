@@ -15,16 +15,16 @@ var maxVelocity = 0.1
 var width = 11
 var height = 9
 
-var level = require("./assets/mapPrototype.json")
+var level = require("./assets/rooms/fivedots.json")
 var levelData = level.layers[0].data
-
+console.log(levelData, level.width, level.height)
 for (var ix = 0; ix < level.width; ix++)
 {
 	for(var iy = 0; iy < level.height; iy++)
 	{
-		var tile = levelData[iy * 33 + ix]
+		var tile = levelData[iy * level.width + ix]
 
-		if(tile ==	1)
+		if(tile == 2)
 		{
 			var tileHTML = $("<div class='wall tile'>")
 			tileHTML.css({top: iy + "em"})
@@ -107,7 +107,7 @@ Loop(function(tick)
 	{
 		vy = -maxVelocity
 	}
-	
+
 	y += vy
 	x += vx
 	cx = Math.floor(x / width) * -width
