@@ -3,8 +3,8 @@ var $ = require("jQuery")
 var Loop = require("./scripts/Loop.js")
 var Input = require("./scripts/Input.js")
 
-var x = 0
-var y = 0
+var x = 1
+var y = 1
 var speed = 1
 var vy = 0
 var vx = 0
@@ -14,6 +14,7 @@ var deacceleration = 0.5
 var maxVelocity = 0.1
 var width = 11
 var height = 9
+var direction = "east"
 
 function createRoom(rx, ry, data)
 {
@@ -70,18 +71,22 @@ Loop(function(tick)
 {
 	if(Input.hasKey(83))
 	{
+		direction = "north"
 		vy +=  speed * tick
 	}
 	if(Input.hasKey(87))
 	{
+		direction = "south"
 		vy -= speed * tick
 	}
 	if(Input.hasKey(65))
 	{
+		direction = "west"
 		vx -= speed * tick
 	}
 	if(Input.hasKey(68))
 	{
+		direction = "east"
 		vx += speed * tick
 	}
 	
@@ -148,4 +153,21 @@ Loop(function(tick)
 	$("#red").css({left: x + "em"})
 	$("#camera").css({top: cy + "em"})
 	$("#camera").css({left: cx + "em"})
+
+	if(direction == "north")
+	{
+		$("#red > img").css({top: "-2em"})
+	}
+	else if(direction == "south")
+	{
+		$("#red > img").css({top: "-3em"})
+	}
+	else if(direction == "west")
+	{
+		$("#red > img").css({top: "-1em"})
+	}
+	else if(direction == "east")
+	{
+		$("#red > img").css({top: "0em"})
+	}
 })
