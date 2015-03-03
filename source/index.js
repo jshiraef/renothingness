@@ -11,29 +11,60 @@ var vx = 0
 var cx = 0
 var cy = 0
 var deacceleration = 0.5
-var maxVelocity = 0.5
+var maxVelocity = 0.1
 var width = 11
 var height = 9
 
-var level = require("./assets/mapPrototype.json")
-var levelData = level.layers[0].data
-
-for (var ix = 0; ix < level.width; ix++)
+function createRoom(rx, ry, data)
 {
-	for(var iy = 0; iy < level.height; iy++)
-	{
-		var tile = levelData[iy * 33 + ix]
+	var rooms = [
+		require("./assets/rooms/bigdot.json"),
+		require("./assets/rooms/fivedots.json"),
+		require("./assets/rooms/fourdots.json"),
+		require("./assets/rooms/grid.json"),
+		require("./assets/rooms/onedot.json")
+	]
 
-		if(tile ==	1)
+	var room = rooms[Math.floor(Math.random() * rooms.length)]
+
+	var roomData = room.layers[0].data
+	for (var tx = 0; tx < room.width; tx++)
+	{
+		for(var ty = 0; ty < room.height; ty++)
 		{
-			var tileHTML = $("<div class='wall tile'>")
-			tileHTML.css({top: iy + "em"})
-			tileHTML.css({left: ix + "em"})
-			 
-			$("#tiles").append(tileHTML)
+			var tile = roomData[ty * room.width + tx]
+
+			if(data.doors.indexOf("north") != -1
+			&& tx == 5 && ty == 0) {
+				continue;
+			}
+			if(data.doors.indexOf("south") != -1
+			&& tx == 5 && ty == 9-1) {
+				continue;
+			}
+			if(data.doors.indexOf("west") != -1
+			&& tx == 0 && ty == 4) {
+				continue;
+			}
+			if(data.doors.indexOf("east") != -1
+			&& tx == 11-1 && ty == 4) {
+				continue;
+			}
+
+			if(tile == 2)
+			{
+				var tileHTML = $("<div class='wall tile'>")
+				tileHTML.css({top: ((ry * 9) + ty) + "em"})
+				tileHTML.css({left: ((rx * 11) + tx) + "em"})
+				$("#tiles").append(tileHTML)
+			}
 		}
 	}
 }
+
+createRoom(0, 0, {doors: ["south"]})
+createRoom(0, 1, {doors: ["north", "east"]})
+createRoom(1, 1, {doors: ["west"]})
 
 Loop(function(tick)
 {
@@ -107,8 +138,8 @@ Loop(function(tick)
 	{
 		vy = -maxVelocity
 	}
-	
-	y += vy	
+
+	y += vy
 	x += vx
 	cx = Math.floor(x / width) * -width
 	cy = Math.floor(y / height) * -height
