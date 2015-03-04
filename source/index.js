@@ -4,13 +4,14 @@ var Loop = require("./scripts/Loop.js")
 var Input = require("./scripts/Input.js")
 
 var Hero = {
-x: 0,
-y: 0,
-speed: 1,
-vy: 0,
-vx: 0,
-deacceleration: 0.5,
-maxVelocity: 0.1
+	x: 0,
+	y: 0,
+	speed: 1,
+	vy: 0,
+	vx: 0,
+	deacceleration: 0.5,
+	maxVelocity: 0.1,
+	direction: "south"
 }
 
 var Camera = {
@@ -20,7 +21,6 @@ cx: 0, cy: 0
 var Room = {
 width: 11, height: 9
 }
-
 
 function createRoom(rx, ry, data)
 {
@@ -80,18 +80,22 @@ Loop(function(tick)
 
 	if(Input.hasKey(83))
 	{
+		Hero.direction = "north"
 		Hero.vy +=  Hero.speed * tick
 	}
 	if(Input.hasKey(87))
 	{
+		Hero.direction = "south"
 		Hero.vy -= Hero.speed * tick
 	}
 	if(Input.hasKey(65))
 	{
+		Hero.direction = "west"
 		Hero.vx -= Hero.speed * tick
 	}
 	if(Input.hasKey(68))
 	{
+		Hero.direction = "east"
 		Hero.vx += Hero.speed * tick
 	}
 	
@@ -158,4 +162,21 @@ Loop(function(tick)
 	$("#red").css({left: Hero.x + "em"})
 	$("#camera").css({top: Camera.cy + "em"})
 	$("#camera").css({left: Camera.cx + "em"})
+
+	if(Hero.direction == "north")
+	{
+		$("#red > img").css({top: "-2em"})
+	}
+	else if(Hero.direction == "south")
+	{
+		$("#red > img").css({top: "-3em"})
+	}
+	else if(Hero.direction == "west")
+	{
+		$("#red > img").css({top: "-1em"})
+	}
+	else if(Hero.direction == "east")
+	{
+		$("#red > img").css({top: "0em"})
+	}
 })

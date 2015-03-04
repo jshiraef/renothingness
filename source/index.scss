@@ -10,8 +10,9 @@ html
 
 .sprite
 {	
-	width: 1em;
+	width: 0.5em;
 	height: 1em;
+	overflow: hidden;
 	position: absolute;
 
 	border-radius: 0.2em;
@@ -27,6 +28,13 @@ html
 	top: 2em;
 	left: 3em;
 	background-color: blue;
+}
+
+#red > img
+{
+	width: auto;
+	height: 4em;
+	position: absolute;
 }
 
 #red  > #sword
@@ -60,7 +68,7 @@ html
 
 .wall.tile
 {
-	background-color: brown;
+	background-color: Sienna;
 }
 
 .floor.tile
