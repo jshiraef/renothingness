@@ -67,7 +67,7 @@ createRoom(1, 1, {doors: ["west"]})
 
 Loop(function(tick)
 {
-	console.log(Hero.x + ", " + Hero.y)
+	//CONTROLLER
 
 	if(Input.hasKey(83))
 	{
@@ -90,8 +90,12 @@ Loop(function(tick)
 		Hero.vx += Hero.speed * tick
 	}
 	
+	//MODEL
+
 	Hero.update()
 
+	//VIEW
+	
 	Camera.cx = Math.floor(Hero.x / Room.width) * -Room.width
 	Camera.cy = Math.floor(Hero.y / Room.height) * -Room.height
 	
