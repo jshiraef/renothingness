@@ -90,62 +90,8 @@ Loop(function(tick)
 		Hero.vx += Hero.speed * tick
 	}
 	
-	if(Hero.vy > 0)
-	{
-		Hero.vy -= Hero.deacceleration * tick
-		
-		if(Hero.vy < 0)
-		{
-			Hero.vy = 0
-		}
-	}
-	else if (Hero.vy < 0)
-	{
-		Hero.vy += Hero.deacceleration * tick
-		
-		if(Hero.vy > 0)
-		{
-			Hero.vy = 0
-		}
-	}
-	if(Hero.vx > 0)
-	{
-		Hero.vx -= Hero.deacceleration * tick
-		
-		if(Hero.vx < 0)
-		{
-			Hero.vx = 0
-		}
-	}
-	else if (Hero.vx < 0)
-	{
-		Hero.vx += Hero.deacceleration * tick
-		
-		if(Hero.vx > 0)
-		{
-			Hero.vx = 0
-		}
-	}
-	
-	if(Hero.vx > Hero.maxVelocity)
-	{
-		 Hero.vx = Hero.maxVelocity
-	}
-	else if(Hero.vx < -Hero.maxVelocity)
-	{
-		 Hero.vx = -Hero.maxVelocity
-	}
-	if(Hero.vy > Hero.maxVelocity)
-	{
-		Hero.vy = Hero.maxVelocity
-	}
-	else if(Hero.vy < -Hero.maxVelocity)
-	{
-		Hero.vy = -Hero.maxVelocity
-	}
+	Hero.update()
 
-	Hero.y += Hero.vy
-	Hero.x += Hero.vx
 	Camera.cx = Math.floor(Hero.x / Room.width) * -Room.width
 	Camera.cy = Math.floor(Hero.y / Room.height) * -Room.height
 	
