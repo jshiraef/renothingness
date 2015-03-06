@@ -3,23 +3,14 @@ var $ = require("jQuery")
 var Loop = require("./scripts/Loop.js")
 var Input = require("./scripts/Input.js")
 
-var Hero = {
-	x: 0,
-	y: 0,
-	speed: 1,
-	vy: 0,
-	vx: 0,
-	deacceleration: 0.5,
-	maxVelocity: 0.1,
-	direction: "south"
-}
+var Hero = require("./scripts/HeroStore.js")
 
 var Camera = {
-cx: 0, cy: 0
+	cx: 0, cy: 0
 }
 
 var Room = {
-width: 11, height: 9
+	width: 11, height: 9
 }
 
 function createRoom(rx, ry, data)
