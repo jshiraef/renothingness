@@ -7,7 +7,7 @@ install:
  - npm install gulp --global
 
 script:
- - npm build
+ - gulp
 
 after_script:
  - chmod +x ./gh-pages.sh
