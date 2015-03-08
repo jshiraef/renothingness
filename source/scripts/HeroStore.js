@@ -6,7 +6,7 @@ module.exports = {
 	vx: 0,
 	deacceleration: 0.5,
 	maxVelocity: 0.1,
-	direction: "south"
+	direction: "south",
 	update: function()
 	{
 		if(this.vy > 0)
