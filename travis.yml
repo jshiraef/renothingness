@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+ - "0.10"
+
+install:
+ - npm install
+ - npm install gulp --global
+
+script:
+ - npm build
+
+after_script:
+ - chmod +x ./gh-pages.sh
+ - ./gh-pages.sh
