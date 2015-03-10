@@ -1,4 +1,4 @@
-var $ = require("jQuery")
+var $ = require("jquery")
 
 var Loop = require("./scripts/Loop.js")
 var Input = require("./scripts/Input.js")
@@ -92,7 +92,7 @@ Loop(function(tick)
 	
 	//MODEL
 
-	Hero.update()
+	Hero.update(tick)
 
 	//VIEW
 	
