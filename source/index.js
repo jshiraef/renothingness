@@ -103,8 +103,8 @@ Loop(function(tick)
 	$("#red").css({left: Hero.x + "em"})
 	$("#camera").css({top: Camera.cy + 2 + "em"})
 	$("#camera").css({left: Camera.cx + "em"})
-	$("#map > #marker").css({top: Math.floor(Hero.y / 9) + "em"})
-	$("#map > #marker").css({left: Math.floor(Hero.x / 11) + "em"})
+	$("#menu > #map > #marker").css({top: Math.floor(Hero.y / 9) + "em"})
+	$("#menu > #map > #marker").css({left: Math.floor(Hero.x / 11) + "em"})
 
 	if(Hero.direction == "north")
 	{
@@ -121,5 +121,10 @@ Loop(function(tick)
 	else if(Hero.direction == "east")
 	{
 		$("#red > img").css({top: "0em"})
+	}
+
+	$("#menu > #health").empty()
+	for(var i = 0; i < Hero.health; i++) {
+		$("#menu > #health").append("!")
 	}
 })

@@ -4,6 +4,7 @@ module.exports = {
 	speed: 1,
 	vy: 0,
 	vx: 0,
+	health: 3,
 	deacceleration: 0.5,
 	maxVelocity: 0.1,
 	direction: "south",
