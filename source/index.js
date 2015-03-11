@@ -13,9 +13,7 @@ var Room = {
 	width: 11, height: 9
 }
 
-function createRoom(rx, ry, data)
-{
-	var rooms = [
+var rooms = [
 		require("./assets/rooms/bigdot.json"),
 		require("./assets/rooms/fivedots.json"),
 		require("./assets/rooms/fourdots.json"),
@@ -26,6 +24,11 @@ function createRoom(rx, ry, data)
 	var room = rooms[Math.floor(Math.random() * rooms.length)]
 
 	var roomData = room.layers[0].data
+	
+	
+function createRoom(rx, ry, data)
+{
+	
 	for (var tx = 0; tx < room.width; tx++)
 	{
 		for(var ty = 0; ty < room.height; ty++)
@@ -47,7 +50,7 @@ function createRoom(rx, ry, data)
 			if(data.doors.indexOf("east") != -1
 			&& tx == 11-1 && ty == 4) {
 				continue;
-			}
+			} 
 
 			if(tile == 2)
 			{
@@ -141,6 +144,32 @@ Loop(function(tick)
 	{
 		Hero.vy = -Hero.maxVelocity
 	}
+	
+	var tx = Math.floor(Hero.x)
+	var ty = Math.floor(Hero.y)
+	
+	var tile = roomData[ty * room.width + tx]
+	var nextTileRight = roomData[ty * room.width + (tx + 1)]
+	var nextTileLeft = roomData[ty * room.width + (tx - 1)]
+	
+	
+	if(Hero.vx > 0)
+		{
+			if(nextTileRight == 2)
+			{
+				Hero.vx = 0
+			}	
+		}
+	
+	if(Hero.vx < 0)
+		{
+			if(nextTileLeft == 2)
+			{
+				Hero.vx = 0
+			}	
+		}
+		
+	console.log(Hero.x + " , " + Hero.y)
 
 	Hero.y += Hero.vy
 	Hero.x += Hero.vx
@@ -151,9 +180,9 @@ Loop(function(tick)
 	$("#red").css({left: Hero.x - Hero.width/2 + "em"})
 	$("#camera").css({top: Camera.cy + "em"})
 	$("#camera").css({left: Camera.cx + "em"})
-	
-	console.log("the hero's position is: " + Hero.x + ", " + Hero.y)
 
+	
+	
 	if(Hero.direction == "north")
 	{
 		$("#red > img").css({top: "-2em"})
