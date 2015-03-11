@@ -93,22 +93,22 @@ html
 	background-color: PapayaWhip;
 }
 
-@media(min-aspect-ratio: 11/9)
+@media(min-aspect-ratio: 1/1)
 {
 	#game-frame
 	{
-		width: 122.222vh;
+		width: 100vh;
 		height: 100vh;
-		font-size: 11.12vh;
+		font-size: (100vh)/11;
 	}
 }
 
-@media(max-aspect-ratio: 11/9)
+@media(max-aspect-ratio: 1/1)
 {
 	#game-frame
 	{
 		width: 100vw;
-		height: 81.818vw;
-		font-size: 9.1vw;
+		height: 100vw;
+		font-size: (100vw)/11;
 	}
 }

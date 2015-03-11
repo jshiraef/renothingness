@@ -101,7 +101,7 @@ Loop(function(tick)
 	
 	$("#red").css({top: Hero.y + "em"})
 	$("#red").css({left: Hero.x + "em"})
-	$("#camera").css({top: Camera.cy + "em"})
+	$("#camera").css({top: Camera.cy + 2 + "em"})
 	$("#camera").css({left: Camera.cx + "em"})
 
 	if(Hero.direction == "north")
