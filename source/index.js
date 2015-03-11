@@ -1,4 +1,4 @@
-var $ = require("jQuery")
+var $ = require("jquery")
 
 var Loop = require("./scripts/Loop.js")
 var Input = require("./scripts/Input.js")
@@ -67,7 +67,7 @@ createRoom(1, 1, {doors: ["west"]})
 
 Loop(function(tick)
 {
-	console.log(Hero.x + ", " + Hero.y)
+	//CONTROLLER
 
 	if(Input.hasKey(83))
 	{
@@ -90,62 +90,12 @@ Loop(function(tick)
 		Hero.vx += Hero.speed * tick
 	}
 	
-	if(Hero.vy > 0)
-	{
-		Hero.vy -= Hero.deacceleration * tick
-		
-		if(Hero.vy < 0)
-		{
-			Hero.vy = 0
-		}
-	}
-	else if (Hero.vy < 0)
-	{
-		Hero.vy += Hero.deacceleration * tick
-		
-		if(Hero.vy > 0)
-		{
-			Hero.vy = 0
-		}
-	}
-	if(Hero.vx > 0)
-	{
-		Hero.vx -= Hero.deacceleration * tick
-		
-		if(Hero.vx < 0)
-		{
-			Hero.vx = 0
-		}
-	}
-	else if (Hero.vx < 0)
-	{
-		Hero.vx += Hero.deacceleration * tick
-		
-		if(Hero.vx > 0)
-		{
-			Hero.vx = 0
-		}
-	}
-	
-	if(Hero.vx > Hero.maxVelocity)
-	{
-		 Hero.vx = Hero.maxVelocity
-	}
-	else if(Hero.vx < -Hero.maxVelocity)
-	{
-		 Hero.vx = -Hero.maxVelocity
-	}
-	if(Hero.vy > Hero.maxVelocity)
-	{
-		Hero.vy = Hero.maxVelocity
-	}
-	else if(Hero.vy < -Hero.maxVelocity)
-	{
-		Hero.vy = -Hero.maxVelocity
-	}
+	//MODEL
 
-	Hero.y += Hero.vy
-	Hero.x += Hero.vx
+	Hero.update(tick)
+
+	//VIEW
+	
 	Camera.cx = Math.floor(Hero.x / Room.width) * -Room.width
 	Camera.cy = Math.floor(Hero.y / Room.height) * -Room.height
 	

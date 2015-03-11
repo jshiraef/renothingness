@@ -1,10 +1,13 @@
 node_modules
 bower_components
 
+deploy_key
+deploy_key.pub
+
 ._*
 *.log
 .DS_Store
 
 build
-nwapps
-ghpages
+nw-apps
+gh-pages
