@@ -5,6 +5,8 @@ module.exports = {
 	vy: 0,
 	vx: 0,
 	health: 3,
+	width: 0.5,
+	height: 1,
 	deacceleration: 0.5,
 	maxVelocity: 0.1,
 	direction: "south",

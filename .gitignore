@@ -1,8 +1,7 @@
 node_modules
 bower_components
 
-deploy_key
-deploy_key.pub
+deploy_key*
 
 ._*
 *.log
