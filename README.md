@@ -10,17 +10,11 @@ Learn more about the project at our [Trello](https://trello.com/b/rzCWqT18/proje
 
 ## Installation ##
 
-### To install our tools ###
-
 	$ choco install git
 	$ choco install node
+	$ npm install
 	$ npm install -g gulp
 	$ npm install -g jasmine-node
-
-### To install all our dependencies ###
-
-	$ npm install
-	$ bower install
 
 ## Development ##
 
@@ -43,7 +37,7 @@ We're all about iterative development, so we've set up a method for recompiling 
 ### To run a server for the code ###
 
 We also set up a server to host the game as you develop it. It statically builds and serves the code. You can access the server
-at [localhost:3000](http://localhost:3000).
+at [localhost:8080](http://localhost:8080).
 
 	$ gulp server
 
