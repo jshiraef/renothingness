@@ -1,6 +1,7 @@
 *
 {
 	margin: 0em;
+	box-sizing: border-box;
 }
 
 html
@@ -61,8 +62,8 @@ html
 .tile
 {
 
-	width: 1em;
-	height: 1em;
+	width: 1.1em;
+	height: 1.1em;
 	position: absolute;
 }
 
@@ -111,4 +112,36 @@ html
 		height: 100vw;
 		font-size: (100vw)/11;
 	}
+}
+
+/*******/
+/*Menu*/
+/*****/
+
+#menu
+{
+	top: 0em;
+	left: 0em;
+	right: 0em;
+	height: 2em;
+	padding: 0.25em;
+	position: absolute;
+
+	color: #EEE;
+	background-color: #111;
+}
+
+#menu > #map
+{
+	width: 2em;
+	height: 1.5em;
+	background-color: red;
+
+	float: left;
+	margin-right: 0.25em;
+}
+
+#menu > #health
+{
+	
 }
