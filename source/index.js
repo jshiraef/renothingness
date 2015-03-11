@@ -4,10 +4,7 @@ var Loop = require("./scripts/Loop.js")
 var Input = require("./scripts/Input.js")
 
 var Hero = require("./scripts/HeroStore.js")
-
-var Camera = {
-	cx: 0, cy: 0
-}
+var Camera = require("./scripts/CameraStore.js")
 
 var Room = {
 	width: 11, height: 9
@@ -30,7 +27,6 @@ function createRoom(rx, ry, data)
 	{
 		for(var ty = 0; ty < room.height; ty++)
 		{
-		
 			var tile = roomData[ty * room.width + tx]
 
 			if(data.doors.indexOf("north") != -1
@@ -67,8 +63,6 @@ createRoom(1, 1, {doors: ["west"]})
 
 Loop(function(tick)
 {
-	//CONTROLLER
-
 	if(Input.hasKey(83))
 	{
 		Hero.direction = "north"
@@ -90,19 +84,71 @@ Loop(function(tick)
 		Hero.vx += Hero.speed * tick
 	}
 	
-	//MODEL
-
-	Hero.update(tick)
-
-	//VIEW
+	if(Hero.vy > 0)
+	{
+		Hero.vy -= Hero.deacceleration * tick
+		
+		if(Hero.vy < 0)
+		{
+			Hero.vy = 0
+		}
+	}
+	else if (Hero.vy < 0)
+	{
+		Hero.vy += Hero.deacceleration * tick
+		
+		if(Hero.vy > 0)
+		{
+			Hero.vy = 0
+		}
+	}
+	if(Hero.vx > 0)
+	{
+		Hero.vx -= Hero.deacceleration * tick
+		
+		if(Hero.vx < 0)
+		{
+			Hero.vx = 0
+		}
+	}
+	else if (Hero.vx < 0)
+	{
+		Hero.vx += Hero.deacceleration * tick
+		
+		if(Hero.vx > 0)
+		{
+			Hero.vx = 0
+		}
+	}
 	
+	if(Hero.vx > Hero.maxVelocity)
+	{
+		 Hero.vx = Hero.maxVelocity
+	}
+	else if(Hero.vx < -Hero.maxVelocity)
+	{
+		 Hero.vx = -Hero.maxVelocity
+	}
+	if(Hero.vy > Hero.maxVelocity)
+	{
+		Hero.vy = Hero.maxVelocity
+	}
+	else if(Hero.vy < -Hero.maxVelocity)
+	{
+		Hero.vy = -Hero.maxVelocity
+	}
+
+	Hero.y += Hero.vy
+	Hero.x += Hero.vx
 	Camera.cx = Math.floor(Hero.x / Room.width) * -Room.width
 	Camera.cy = Math.floor(Hero.y / Room.height) * -Room.height
-	
-	$("#red").css({top: Hero.y + "em"})
-	$("#red").css({left: Hero.x + "em"})
+
+	$("#red").css({top: Hero.y - (Hero.height / 2) + "em"})
+	$("#red").css({left: Hero.x - (Hero.width / 2) + "em"})
 	$("#camera").css({top: Camera.cy + 2 + "em"})
 	$("#camera").css({left: Camera.cx + "em"})
+	
+	console.log("the hero's position is: " + Hero.x + ", " + Hero.y)
 
 	if(Hero.direction == "north")
 	{
