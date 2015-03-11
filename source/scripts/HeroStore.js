@@ -65,5 +65,16 @@ module.exports = {
 
 		this.y += this.vy
 		this.x += this.vx
-	}
+	},
+	
+	positionX: function()
+	{
+		return Mathf.floor(this.x + 0.5)
+	},
+
+	positionY: function()
+	{
+		return Mathf.floor(this.y + 0.5)
+	}	 
+
 }

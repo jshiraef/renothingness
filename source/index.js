@@ -1,4 +1,4 @@
-var $ = require("jquery")
+var $ = require("jQuery")
 
 var Loop = require("./scripts/Loop.js")
 var Input = require("./scripts/Input.js")
@@ -30,7 +30,6 @@ function createRoom(rx, ry, data)
 	{
 		for(var ty = 0; ty < room.height; ty++)
 		{
-		
 			var tile = roomData[ty * room.width + tx]
 
 			if(data.doors.indexOf("north") != -1
@@ -67,7 +66,6 @@ createRoom(1, 1, {doors: ["west"]})
 
 Loop(function(tick)
 {
-	//CONTROLLER
 
 	if(Input.hasKey(83))
 	{
@@ -90,12 +88,64 @@ Loop(function(tick)
 		Hero.vx += Hero.speed * tick
 	}
 	
-	//MODEL
-
-	Hero.update(tick)
-
-	//VIEW
+	if(Hero.vy > 0)
+	{
+		Hero.vy -= Hero.deacceleration * tick
+		
+		if(Hero.vy < 0)
+		{
+			Hero.vy = 0
+		}
+	}
+	else if (Hero.vy < 0)
+	{
+		Hero.vy += Hero.deacceleration * tick
+		
+		if(Hero.vy > 0)
+		{
+			Hero.vy = 0
+		}
+	}
+	if(Hero.vx > 0)
+	{
+		Hero.vx -= Hero.deacceleration * tick
+		
+		if(Hero.vx < 0)
+		{
+			Hero.vx = 0
+		}
+	}
+	else if (Hero.vx < 0)
+	{
+		Hero.vx += Hero.deacceleration * tick
+		
+		if(Hero.vx > 0)
+		{
+			Hero.vx = 0
+		}
+	}
 	
+	if(Hero.vx > Hero.maxVelocity)
+	{
+		 Hero.vx = Hero.maxVelocity
+	}
+	else if(Hero.vx < -Hero.maxVelocity)
+	{
+		 Hero.vx = -Hero.maxVelocity
+	}
+	if(Hero.vy > Hero.maxVelocity)
+	{
+		Hero.vy = Hero.maxVelocity
+	}
+	else if(Hero.vy < -Hero.maxVelocity)
+	{
+		Hero.vy = -Hero.maxVelocity
+	}
+
+	console.log("the position should be " + Hero.positionX() + ", " + Hero.positionY())
+
+	Hero.y += Hero.vy
+	Hero.x += Hero.vx
 	Camera.cx = Math.floor(Hero.x / Room.width) * -Room.width
 	Camera.cy = Math.floor(Hero.y / Room.height) * -Room.height
 	
