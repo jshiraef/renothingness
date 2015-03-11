@@ -103,6 +103,8 @@ Loop(function(tick)
 	$("#red").css({left: Hero.x + "em"})
 	$("#camera").css({top: Camera.cy + 2 + "em"})
 	$("#camera").css({left: Camera.cx + "em"})
+	$("#map > #marker").css({top: Math.floor(Hero.y / 9) + "em"})
+	$("#map > #marker").css({left: Math.floor(Hero.x / 11) + "em"})
 
 	if(Hero.direction == "north")
 	{

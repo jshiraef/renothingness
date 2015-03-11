@@ -135,10 +135,22 @@ html
 {
 	width: 2em;
 	height: 1.5em;
+	position: relative;
 	background-color: red;
 
 	float: left;
 	margin-right: 0.25em;
+}
+
+#menu > #map > #marker
+{
+	width: 1em;
+	height: 1em;
+
+	font-size: 0.25em;
+	position: absolute;
+
+	background-color: blue;
 }
 
 #menu > #health
