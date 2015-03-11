@@ -5,7 +5,7 @@ module.exports = {
 	vy: 0,
 	vx: 0,
 	width: .5,
-	height: .5,
+	height: 1,
 	deacceleration: 0.5,
 	maxVelocity: 0.1,
 	direction: "south",
@@ -71,12 +71,12 @@ module.exports = {
 	
 	positionX: function()
 	{
-		return Math.floor(this.x + this.width)
+		return (this.x + this.width)
 	},
 
 	positionY: function()
 	{
-		return Math.floor(this.y + this.height)
+		return (this.y + this.height)
 	}	 
 
 }

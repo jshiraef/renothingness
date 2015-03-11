@@ -142,17 +142,17 @@ Loop(function(tick)
 		Hero.vy = -Hero.maxVelocity
 	}
 
-	console.log("the position should be " + Hero.positionX() + ", " + Hero.positionY())
-
 	Hero.y += Hero.vy
 	Hero.x += Hero.vx
 	Camera.cx = Math.floor(Hero.x / Room.width) * -Room.width
 	Camera.cy = Math.floor(Hero.y / Room.height) * -Room.height
 	
-	$("#red").css({top: Hero.y + "em"})
-	$("#red").css({left: Hero.x + "em"})
+	$("#red").css({top: Hero.y - Hero.height/2 + "em"})
+	$("#red").css({left: Hero.x - Hero.width/2 + "em"})
 	$("#camera").css({top: Camera.cy + "em"})
 	$("#camera").css({left: Camera.cx + "em"})
+	
+	console.log("the hero's position is: " + Hero.x + ", " + Hero.y)
 
 	if(Hero.direction == "north")
 	{
