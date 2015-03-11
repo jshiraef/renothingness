@@ -67,16 +67,5 @@ module.exports = {
 
 		this.y += this.vy
 		this.x += this.vx
-	},
-	
-	positionX: function()
-	{
-		return (this.x + this.width)
-	},
-
-	positionY: function()
-	{
-		return (this.y + this.height)
-	}	 
-
+	}
 }

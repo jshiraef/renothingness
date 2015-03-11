@@ -1,13 +1,10 @@
-var $ = require("jQuery")
+var $ = require("jquery")
 
 var Loop = require("./scripts/Loop.js")
 var Input = require("./scripts/Input.js")
 
 var Hero = require("./scripts/HeroStore.js")
-
-var Camera = {
-	cx: 0, cy: 0
-}
+var Camera = require("./scripts/CameraStore.js")
 
 var Room = {
 	width: 11, height: 9
@@ -66,7 +63,6 @@ createRoom(1, 1, {doors: ["west"]})
 
 Loop(function(tick)
 {
-
 	if(Input.hasKey(83))
 	{
 		Hero.direction = "north"
