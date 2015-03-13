@@ -1,6 +1,7 @@
 *
 {
 	margin: 0em;
+	box-sizing: border-box;
 }
 
 html
@@ -61,8 +62,8 @@ html
 .tile
 {
 
-	width: 1em;
-	height: 1em;
+	width: 1.1em;
+	height: 1.1em;
 	position: absolute;
 }
 
@@ -93,22 +94,66 @@ html
 	background-color: PapayaWhip;
 }
 
-@media(min-aspect-ratio: 11/9)
+@media(min-aspect-ratio: 1/1)
 {
 	#game-frame
 	{
-		width: 122.222vh;
+		width: 100vh;
 		height: 100vh;
-		font-size: 11.12vh;
+		font-size: (100vh)/11;
 	}
 }
 
-@media(max-aspect-ratio: 11/9)
+@media(max-aspect-ratio: 1/1)
 {
 	#game-frame
 	{
 		width: 100vw;
-		height: 81.818vw;
-		font-size: 9.1vw;
+		height: 100vw;
+		font-size: (100vw)/11;
 	}
+}
+
+/*******/
+/*Menu*/
+/*****/
+
+#menu
+{
+	top: 0em;
+	left: 0em;
+	right: 0em;
+	height: 2em;
+	padding: 0.25em;
+	position: absolute;
+
+	color: #EEE;
+	background-color: #111;
+}
+
+#menu > #map
+{
+	width: 2em;
+	height: 1.5em;
+	position: relative;
+	background-color: red;
+
+	float: left;
+	margin-right: 0.25em;
+}
+
+#menu > #map > #marker
+{
+	width: 1em;
+	height: 1em;
+
+	font-size: 0.25em;
+	position: absolute;
+
+	background-color: blue;
+}
+
+#menu > #health
+{
+	
 }

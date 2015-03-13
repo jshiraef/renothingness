@@ -142,11 +142,13 @@ Loop(function(tick)
 	Hero.x += Hero.vx
 	Camera.cx = Math.floor(Hero.x / Room.width) * -Room.width
 	Camera.cy = Math.floor(Hero.y / Room.height) * -Room.height
-	
-	$("#red").css({top: Hero.y - Hero.height/2 + "em"})
-	$("#red").css({left: Hero.x - Hero.width/2 + "em"})
-	$("#camera").css({top: Camera.cy + "em"})
+
+	$("#red").css({top: Hero.y - (Hero.height / 2) + "em"})
+	$("#red").css({left: Hero.x - (Hero.width / 2) + "em"})
+	$("#camera").css({top: Camera.cy + 2 + "em"})
 	$("#camera").css({left: Camera.cx + "em"})
+	$("#menu > #map > #marker").css({top: Math.floor(Hero.y / Room.height) + "em"})
+	$("#menu > #map > #marker").css({left: Math.floor(Hero.x / Room.width) + "em"})
 	
 	console.log("the hero's position is: " + Hero.x + ", " + Hero.y)
 
@@ -165,5 +167,10 @@ Loop(function(tick)
 	else if(Hero.direction == "east")
 	{
 		$("#red > img").css({top: "0em"})
+	}
+
+	$("#menu > #health").empty()
+	for(var i = 0; i < Hero.health; i++) {
+		$("#menu > #health").append("!")
 	}
 })
