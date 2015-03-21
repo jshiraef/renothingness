@@ -14,11 +14,50 @@ var Room = {
     height: 9
 }
 
+var Blue = {
+	x: 3.5,
+    y: 2.5,
+    width: 0.5,
+    height: 1
+}
+
+$("#blue").css({top: Blue.y - Blue.height/2 + "em"})
+$("#blue").css({left: Blue.x - Blue.width/2 + "em"})
+
 var tiles = {}
 
 function hasTile(x, y)
 {
     return tiles[Math.floor(x) + "-" + Math.floor(y)] == true
+}
+
+function isIntersecting(a, b)
+{
+    //this function assumes and b are both
+    //objects that have the following properties:
+    //    x
+    //    y
+    //    width
+    //    height
+    // where x and y are anchored at the center
+    // of the entity, and both position (x and y)
+    // and dimensions (width and height) are in ems.
+    
+    var ax1 = a.x - (a.width / 2)
+    var ax2 = a.x + (a.width / 2)
+    var ay1 = a.y - (a.height / 2)
+    var ay2 = a.y + (a.height / 2)
+    var bx1 = b.x - (b.width / 2)
+    var bx2 = b.x + (b.width / 2)
+    var by1 = b.y - (b.height / 2)
+    var by2 = b.y + (b.height / 2)
+    
+    if(ax1 > bx2) {return false}
+    if(ay1 > by2) {return false}
+    if(ax2 < bx1) {return false}
+    if(ay2 < by1) {return false}
+    
+    return true
 }
 
 function createRoom(rx, ry, data)
@@ -69,7 +108,6 @@ function createRoom(rx, ry, data)
 createRoom(0, 0, {doors: ["south"]})
 createRoom(0, 1, {doors: ["north", "east"]})
 createRoom(1, 1, {doors: ["west"]})
-console.log(tiles)
 
 Loop(function(tick)
 {
@@ -156,6 +194,11 @@ Loop(function(tick)
     if(!hasTile(Hero.x, Hero.y + Hero.vy))
     {
         Hero.y += Hero.vy
+    }
+    
+    if(isIntersecting(Hero, Blue))
+    {
+        console.log("red takes damage")
     }
     
     //console.log(Hero.x.toFixed(2) + " , " + Hero.y.toFixed(2))
