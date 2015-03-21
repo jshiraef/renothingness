@@ -1,13 +1,10 @@
-var $ = require("jQuery")
+var $ = require("jquery")
 
 var Loop = require("./scripts/Loop.js")
 var Input = require("./scripts/Input.js")
 
 var Hero = require("./scripts/HeroStore.js")
-
-var Camera = {
-	cx: 0, cy: 0
-}
+var Camera = require("./scripts/CameraStore.js")
 
 var Room = {
 	width: 11,
@@ -111,7 +108,6 @@ createRoom(1, 1, {doors: ["west"]})
 
 Loop(function(tick)
 {
-
 	if(Input.hasKey(83))
 	{
 		Hero.direction = "north"
@@ -205,11 +201,13 @@ Loop(function(tick)
     
 	Camera.cx = Math.floor(Hero.x / Room.width) * -Room.width
 	Camera.cy = Math.floor(Hero.y / Room.height) * -Room.height
-	
-	$("#red").css({top: Hero.y - Hero.height/2 + "em"})
-	$("#red").css({left: Hero.x - Hero.width/2 + "em"})
-	$("#camera").css({top: Camera.cy + "em"})
+
+	$("#red").css({top: Hero.y - (Hero.height / 2) + "em"})
+	$("#red").css({left: Hero.x - (Hero.width / 2) + "em"})
+	$("#camera").css({top: Camera.cy + 2 + "em"})
 	$("#camera").css({left: Camera.cx + "em"})
+	$("#menu > #map > #marker").css({top: Math.floor(Hero.y / Room.height) + "em"})
+	$("#menu > #map > #marker").css({left: Math.floor(Hero.x / Room.width) + "em"})
 	
 	if(Hero.direction == "north")
 	{
@@ -226,5 +224,10 @@ Loop(function(tick)
 	else if(Hero.direction == "east")
 	{
 		$("#red > img").css({top: "0em"})
+	}
+
+	$("#menu > #health").empty()
+	for(var i = 0; i < Hero.health; i++) {
+		$("#menu > #health").append("!")
 	}
 })

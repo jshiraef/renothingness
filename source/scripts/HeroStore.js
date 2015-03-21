@@ -4,7 +4,8 @@ module.exports = {
 	speed: 1,
 	vy: 0,
 	vx: 0,
-	width: .5,
+	health: 3,
+	width: 0.5,
 	height: 1,
 	deacceleration: 0.5,
 	maxVelocity: 0.1,
@@ -67,16 +68,5 @@ module.exports = {
 
 		this.y += this.vy
 		this.x += this.vx
-	},
-	
-	positionX: function()
-	{
-		return (this.x + this.width)
-	},
-
-	positionY: function()
-	{
-		return (this.y + this.height)
-	}	 
-
+	}
 }
