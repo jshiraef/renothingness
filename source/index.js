@@ -10,7 +10,15 @@ var Camera = {
 }
 
 var Room = {
-	width: 11, height: 9
+	width: 11,
+    height: 9
+}
+
+var tiles = {}
+
+function hasTile(x, y)
+{
+    return tiles[Math.floor(x) + "-" + Math.floor(y)] == true
 }
 
 function createRoom(rx, ry, data)
@@ -26,12 +34,8 @@ function createRoom(rx, ry, data)
 	var room = rooms[Math.floor(Math.random() * rooms.length)]
 
 	var roomData = room.layers[0].data
-	for (var tx = 0; tx < room.width; tx++)
-	{
-		for(var ty = 0; ty < room.height; ty++)
-		{
-			var tile = roomData[ty * room.width + tx]
-
+	for (var tx = 0; tx < room.width; tx++) {
+		for(var ty = 0; ty < room.height; ty++) {
 			if(data.doors.indexOf("north") != -1
 			&& tx == 5 && ty == 0) {
 				continue;
@@ -48,12 +52,14 @@ function createRoom(rx, ry, data)
 			&& tx == 11-1 && ty == 4) {
 				continue;
 			}
-
-			if(tile == 2)
-			{
+			var tile = roomData[ty * room.width + tx]
+			if(tile == 2) {
+                var x = (rx * 11) + tx
+                var y = (ry * 9) + ty
+                tiles[x + "-" + y] = true
 				var tileHTML = $("<div class='wall tile'>")
-				tileHTML.css({top: ((ry * 9) + ty) + "em"})
-				tileHTML.css({left: ((rx * 11) + tx) + "em"})
+				tileHTML.css({top: y + "em"})
+				tileHTML.css({left: x + "em"})
 				$("#tiles").append(tileHTML)
 			}
 		}
@@ -63,6 +69,7 @@ function createRoom(rx, ry, data)
 createRoom(0, 0, {doors: ["south"]})
 createRoom(0, 1, {doors: ["north", "east"]})
 createRoom(1, 1, {doors: ["west"]})
+console.log(tiles)
 
 Loop(function(tick)
 {
@@ -97,7 +104,7 @@ Loop(function(tick)
 			Hero.vy = 0
 		}
 	}
-	else if (Hero.vy < 0)
+	else if(Hero.vy < 0)
 	{
 		Hero.vy += Hero.deacceleration * tick
 		
@@ -115,7 +122,7 @@ Loop(function(tick)
 			Hero.vx = 0
 		}
 	}
-	else if (Hero.vx < 0)
+	else if(Hero.vx < 0)
 	{
 		Hero.vx += Hero.deacceleration * tick
 		
@@ -141,9 +148,18 @@ Loop(function(tick)
 	{
 		Hero.vy = -Hero.maxVelocity
 	}
-
-	Hero.y += Hero.vy
-	Hero.x += Hero.vx
+    
+    if(!hasTile(Hero.x + Hero.vx, Hero.y))
+    {
+        Hero.x += Hero.vx
+    }
+    if(!hasTile(Hero.x, Hero.y + Hero.vy))
+    {
+        Hero.y += Hero.vy
+    }
+    
+    //console.log(Hero.x.toFixed(2) + " , " + Hero.y.toFixed(2))
+    
 	Camera.cx = Math.floor(Hero.x / Room.width) * -Room.width
 	Camera.cy = Math.floor(Hero.y / Room.height) * -Room.height
 	
@@ -152,8 +168,6 @@ Loop(function(tick)
 	$("#camera").css({top: Camera.cy + "em"})
 	$("#camera").css({left: Camera.cx + "em"})
 	
-	console.log("the hero's position is: " + Hero.x + ", " + Hero.y)
-
 	if(Hero.direction == "north")
 	{
 		$("#red > img").css({top: "-2em"})

@@ -1,6 +1,6 @@
 module.exports = {
-	x: 0,
-	y: 0,
+	x: 1.5,
+	y: 1.5,
 	speed: 1,
 	vy: 0,
 	vx: 0,
