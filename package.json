@@ -1,14 +1,15 @@
 {
   "name": "renothingness",
   "version": "0.0.0",
+  "main": "./build/index.html",
+  "contributors": [
+    "Andrew McPherson",
+    "Joey Shiraef"
+  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/mocsarcade/renothingness.git"
+    "url": "https://github.com/mocsarcade/renothingness"
   },
-  "authors": [
-    "Joey Shiraef",
-    "Andrew McPherson"
-  ],
   "devDependencies": {
     "aliasify": "^1.5.1",
     "browserify": "^9.0.3",
