@@ -72,7 +72,6 @@ function createRoom(rx, ry, data)
 	var room = rooms[Math.floor(Math.random() * rooms.length)]
 	
 	var roomData = room.layers[0].data
-	
 	for (var tx = 0; tx < room.width; tx++)
 	{
 		for(var ty = 0; ty < room.height; ty++)
@@ -189,13 +188,6 @@ Loop(function(tick)
 		Hero.vy = -Hero.maxVelocity
 	}
 	
-	var tx = Math.floor(Hero.x)
-	var ty = Math.floor(Hero.y)
-	
-	var tile = roomData[ty * room.width + tx]
-	var nextTileRight = roomData[ty * room.width + (tx + 1)]
-	var nextTileLeft = roomData[ty * room.width + (tx - 1)]
-
     if(!hasTile(Hero.x + Hero.vx, Hero.y))
     {
         Hero.x += Hero.vx
