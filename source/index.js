@@ -1,16 +1,60 @@
-var $ = require("jQuery")
+var $ = require("jquery")
 
 var Loop = require("./scripts/Loop.js")
 var Input = require("./scripts/Input.js")
 
 var Hero = require("./scripts/HeroStore.js")
-
-var Camera = {
-	cx: 0, cy: 0
-}
+var Camera = require("./scripts/CameraStore.js")
 
 var Room = {
-	width: 11, height: 9
+	width: 11,
+    height: 9
+}
+
+var Blue = {
+	x: 3.5,
+    y: 2.5,
+    width: 0.5,
+    height: 1
+}
+
+$("#blue").css({top: Blue.y - Blue.height/2 + "em"})
+$("#blue").css({left: Blue.x - Blue.width/2 + "em"})
+
+var tiles = {}
+
+function hasTile(x, y)
+{
+    return tiles[Math.floor(x) + "-" + Math.floor(y)] == true
+}
+
+function isIntersecting(a, b)
+{
+    //this function assumes and b are both
+    //objects that have the following properties:
+    //    x
+    //    y
+    //    width
+    //    height
+    // where x and y are anchored at the center
+    // of the entity, and both position (x and y)
+    // and dimensions (width and height) are in ems.
+    
+    var ax1 = a.x - (a.width / 2)
+    var ax2 = a.x + (a.width / 2)
+    var ay1 = a.y - (a.height / 2)
+    var ay2 = a.y + (a.height / 2)
+    var bx1 = b.x - (b.width / 2)
+    var bx2 = b.x + (b.width / 2)
+    var by1 = b.y - (b.height / 2)
+    var by2 = b.y + (b.height / 2)
+    
+    if(ax1 > bx2) {return false}
+    if(ay1 > by2) {return false}
+    if(ax2 < bx1) {return false}
+    if(ay2 < by1) {return false}
+    
+    return true
 }
 
 var rooms = [
@@ -24,6 +68,7 @@ var rooms = [
 	var room = rooms[Math.floor(Math.random() * rooms.length)]
 
 	var roomData = room.layers[0].data
+<<<<<<< HEAD
 	
 	
 function createRoom(rx, ry, data)
@@ -35,6 +80,10 @@ function createRoom(rx, ry, data)
 		{
 			var tile = roomData[ty * room.width + tx]
 
+=======
+	for (var tx = 0; tx < room.width; tx++) {
+		for(var ty = 0; ty < room.height; ty++) {
+>>>>>>> 73b57f072763fa2599f47a7fd4c8466778c5a9c5
 			if(data.doors.indexOf("north") != -1
 			&& tx == 5 && ty == 0) {
 				continue;
@@ -50,13 +99,22 @@ function createRoom(rx, ry, data)
 			if(data.doors.indexOf("east") != -1
 			&& tx == 11-1 && ty == 4) {
 				continue;
+<<<<<<< HEAD
 			} 
 
 			if(tile == 2)
 			{
+=======
+			}
+			var tile = roomData[ty * room.width + tx]
+			if(tile == 2) {
+                var x = (rx * 11) + tx
+                var y = (ry * 9) + ty
+                tiles[x + "-" + y] = true
+>>>>>>> 73b57f072763fa2599f47a7fd4c8466778c5a9c5
 				var tileHTML = $("<div class='wall tile'>")
-				tileHTML.css({top: ((ry * 9) + ty) + "em"})
-				tileHTML.css({left: ((rx * 11) + tx) + "em"})
+				tileHTML.css({top: y + "em"})
+				tileHTML.css({left: x + "em"})
 				$("#tiles").append(tileHTML)
 			}
 		}
@@ -69,7 +127,6 @@ createRoom(1, 1, {doors: ["west"]})
 
 Loop(function(tick)
 {
-
 	if(Input.hasKey(83))
 	{
 		Hero.direction = "north"
@@ -100,7 +157,7 @@ Loop(function(tick)
 			Hero.vy = 0
 		}
 	}
-	else if (Hero.vy < 0)
+	else if(Hero.vy < 0)
 	{
 		Hero.vy += Hero.deacceleration * tick
 		
@@ -118,7 +175,7 @@ Loop(function(tick)
 			Hero.vx = 0
 		}
 	}
-	else if (Hero.vx < 0)
+	else if(Hero.vx < 0)
 	{
 		Hero.vx += Hero.deacceleration * tick
 		
@@ -144,6 +201,7 @@ Loop(function(tick)
 	{
 		Hero.vy = -Hero.maxVelocity
 	}
+<<<<<<< HEAD
 	
 	var tx = Math.floor(Hero.x)
 	var ty = Math.floor(Hero.y)
@@ -173,15 +231,30 @@ Loop(function(tick)
 
 	Hero.y += Hero.vy
 	Hero.x += Hero.vx
-	Camera.cx = Math.floor(Hero.x / Room.width) * -Room.width
-	Camera.cy = Math.floor(Hero.y / Room.height) * -Room.height
-	
-	$("#red").css({top: Hero.y - Hero.height/2 + "em"})
-	$("#red").css({left: Hero.x - Hero.width/2 + "em"})
-	$("#camera").css({top: Camera.cy + "em"})
+=======
+    
+    if(!hasTile(Hero.x + Hero.vx, Hero.y))
+    {
+        Hero.x += Hero.vx
+    }
+    if(!hasTile(Hero.x, Hero.y + Hero.vy))
+    {
+        Hero.y += Hero.vy
+    }
+    
+    if(isIntersecting(Hero, Blue))
+    {
+        console.log("red takes damage")
+    }
+    
+    //console.log(Hero.x.toFixed(2) + " , " + Hero.y.toFixed(2))
+    
+	$("#red").css({top: Hero.y - (Hero.height / 2) + "em"})
+	$("#red").css({left: Hero.x - (Hero.width / 2) + "em"})
+	$("#camera").css({top: Camera.cy + 2 + "em"})
 	$("#camera").css({left: Camera.cx + "em"})
-
-	
+	$("#menu > #map > #marker").css({top: Math.floor(Hero.y / Room.height) + "em"})
+	$("#menu > #map > #marker").css({left: Math.floor(Hero.x / Room.width) + "em"})
 	
 	if(Hero.direction == "north")
 	{
@@ -198,5 +271,10 @@ Loop(function(tick)
 	else if(Hero.direction == "east")
 	{
 		$("#red > img").css({top: "0em"})
+	}
+
+	$("#menu > #health").empty()
+	for(var i = 0; i < Hero.health; i++) {
+		$("#menu > #health").append("!")
 	}
 })
