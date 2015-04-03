@@ -77,8 +77,6 @@ function createRoom(rx, ry, data)
 	{
 		for(var ty = 0; ty < room.height; ty++)
 		{
-			var tile = roomData[ty * room.width + tx]
-
 			if(data.doors.indexOf("north") != -1
 			&& tx == 5 && ty == 0) {
 				continue;
@@ -96,10 +94,6 @@ function createRoom(rx, ry, data)
 				continue;
 			} 
 
-			if(tile == 2)
-			{
-
-			}
 			var tile = roomData[ty * room.width + tx]
 			if(tile == 2) {
                 var x = (rx * 11) + tx
@@ -201,30 +195,7 @@ Loop(function(tick)
 	var tile = roomData[ty * room.width + tx]
 	var nextTileRight = roomData[ty * room.width + (tx + 1)]
 	var nextTileLeft = roomData[ty * room.width + (tx - 1)]
-	
-	
-	if(Hero.vx > 0)
-		{
-			if(nextTileRight == 2)
-			{
-				Hero.vx = 0
-			}	
-		}
-	
-	if(Hero.vx < 0)
-		{
-			if(nextTileLeft == 2)
-			{
-				Hero.vx = 0
-			}	
-		}
-		
-	console.log(Hero.x + " , " + Hero.y)
 
-	Hero.y += Hero.vy
-	Hero.x += Hero.vx
-=======
-    
     if(!hasTile(Hero.x + Hero.vx, Hero.y))
     {
         Hero.x += Hero.vx
@@ -240,6 +211,9 @@ Loop(function(tick)
     }
     
     //console.log(Hero.x.toFixed(2) + " , " + Hero.y.toFixed(2))
+	
+	Camera.cx = Math.floor(Hero.x / Room.width) * -Room.width
+	Camera.cy = Math.floor(Hero.y / Room.height) * -Room.height
     
 	$("#red").css({top: Hero.y - (Hero.height / 2) + "em"})
 	$("#red").css({left: Hero.x - (Hero.width / 2) + "em"})
