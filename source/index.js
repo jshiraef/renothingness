@@ -56,23 +56,22 @@ function isIntersecting(a, b)
     
     return true
 }
+	
+	
+function createRoom(rx, ry, data)
+{
 
-var rooms = [
+	var rooms = [
 		require("./assets/rooms/bigdot.json"),
 		require("./assets/rooms/fivedots.json"),
 		require("./assets/rooms/fourdots.json"),
 		require("./assets/rooms/grid.json"),
 		require("./assets/rooms/onedot.json")
 	]
-
+	
 	var room = rooms[Math.floor(Math.random() * rooms.length)]
-
+	
 	var roomData = room.layers[0].data
-<<<<<<< HEAD
-	
-	
-function createRoom(rx, ry, data)
-{
 	
 	for (var tx = 0; tx < room.width; tx++)
 	{
@@ -80,10 +79,6 @@ function createRoom(rx, ry, data)
 		{
 			var tile = roomData[ty * room.width + tx]
 
-=======
-	for (var tx = 0; tx < room.width; tx++) {
-		for(var ty = 0; ty < room.height; ty++) {
->>>>>>> 73b57f072763fa2599f47a7fd4c8466778c5a9c5
 			if(data.doors.indexOf("north") != -1
 			&& tx == 5 && ty == 0) {
 				continue;
@@ -99,19 +94,17 @@ function createRoom(rx, ry, data)
 			if(data.doors.indexOf("east") != -1
 			&& tx == 11-1 && ty == 4) {
 				continue;
-<<<<<<< HEAD
 			} 
 
 			if(tile == 2)
 			{
-=======
+
 			}
 			var tile = roomData[ty * room.width + tx]
 			if(tile == 2) {
                 var x = (rx * 11) + tx
                 var y = (ry * 9) + ty
                 tiles[x + "-" + y] = true
->>>>>>> 73b57f072763fa2599f47a7fd4c8466778c5a9c5
 				var tileHTML = $("<div class='wall tile'>")
 				tileHTML.css({top: y + "em"})
 				tileHTML.css({left: x + "em"})
@@ -201,7 +194,6 @@ Loop(function(tick)
 	{
 		Hero.vy = -Hero.maxVelocity
 	}
-<<<<<<< HEAD
 	
 	var tx = Math.floor(Hero.x)
 	var ty = Math.floor(Hero.y)
